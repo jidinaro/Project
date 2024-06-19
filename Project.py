@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parámetros del modelo
+# Parámetros
 beta = 0.98
 rho = 0.94
 sigma_e = 0.015
@@ -11,13 +11,12 @@ d0 = 0.17
 d1 = 1.2
 psi  = 0.5
 r = 0.01
-num_periods = 300  # Número de períodos para la simulación
-
-# Inicializar el vector de y
+num_periods = 300  
+# Grid de Y
 y_fcst = np.zeros(num_periods)
-y_fcst[0] = np.random.uniform(0.1, 2.0)  # Valor inicial aleatorio dentro del rango
+y_fcst[0] = np.random.uniform(0.1, 2.0) 
 
-# Simulación del proceso de y
+# Simulación de Y
 for t in range(1, num_periods):
     y_fcst[t] = rho * np.log(y_fcst[t-1]) + (1 - rho) * mu + np.random.normal(0,sigma_e)
     y_fcst[t] = np.exp(y_fcst[t])
@@ -30,7 +29,7 @@ def u(c, sigma):
 def h(y, d0, d1):
     return d0 * y + d1 * y**2
 
-# Inicializar funciones de valor y precios
+# Grid Value functions, precios y default prob
 V = np.zeros(num_periods)
 V_A = np.zeros(num_periods)
 q = np.zeros(num_periods)
@@ -66,7 +65,7 @@ for it in range(max_iter):
         break
     V = V_new
 
-# Graficar la función de valor contra el tiempo (simulación)
+# Graficar la función de valor contra el tiempo
 plt.figure(figsize=(10, 6))
 plt.plot(np.arange(num_periods), V, label='Función de Valor \(V\)')
 plt.xlabel('Período')
