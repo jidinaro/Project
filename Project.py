@@ -49,7 +49,7 @@ for it in range(max_iter):
         V_default = V_A[i]
         V_repay = -np.inf
         for j in range(num_periods):
-            b_prime = y_fcst[j]
+            b_prime = y_fcst[j] - 1 #Media de Y
             c = y - b_prime + q[j] * b_prime
             if c > 0:
                 V_repay = max(V_repay, u(c, sigma) + beta * V[j])
